@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { AlertCircle, Package } from 'lucide-react';
-
+import {ar} from '../../../lib/ar';
 export function InventoryReports() {
   const [stats, setStats] = useState({
     totalItems: 0,
@@ -47,17 +47,17 @@ export function InventoryReports() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading reports...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-6">Inventory Reports</h3>
+      <h3 className="text-xl font-semibold text-gray-900 mb-6">{ar.inventory.reports}</h3>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm">Total Items</p>
+              <p className="text-gray-600 text-sm">{ar.inventory.totalitems}</p>
               <p className="text-3xl font-bold text-blue-900">{stats.totalItems}</p>
             </div>
             <Package className="w-10 h-10 text-blue-600 opacity-50" />
@@ -67,7 +67,7 @@ export function InventoryReports() {
         <div className="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border border-green-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-gray-600 text-sm">Total Inventory Value</p>
+              <p className="text-gray-600 text-sm">{ar.inventory.totalvalue}</p>
               <p className="text-3xl font-bold text-green-900">${stats.totalValue.toFixed(0)}</p>
             </div>
             <Package className="w-10 h-10 text-green-600 opacity-50" />
@@ -79,24 +79,24 @@ export function InventoryReports() {
         <div className="flex items-start gap-3">
           <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-1" />
           <div>
-            <h4 className="font-semibold text-red-900 mb-2">Low Stock Alert</h4>
-            <p className="text-red-700">{stats.lowStockItems} item(s) below reorder level</p>
+            <h4 className="font-semibold text-red-900 mb-2">{ar.inventory.lowstockitems}</h4>
+            <p className="text-red-700">{stats.lowStockItems}  {ar.inventory.belowreorderlevel}</p>
           </div>
         </div>
       </div>
 
       {lowStockList.length > 0 && (
         <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h4 className="font-semibold text-gray-900 mb-4">Items Below Reorder Level</h4>
+          <h4 className="font-semibold text-gray-900 mb-4">{ar.inventory.belowreorderlevel}</h4>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="bg-gray-100 border-b-2 border-gray-300">
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Code</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Item Name</th>
-                  <th className="px-4 py-3 text-right font-semibold text-gray-700">Current</th>
-                  <th className="px-4 py-3 text-right font-semibold text-gray-700">Reorder</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Shortage</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.itemCode}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.itemName}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.inventory.CurrentStock}</th>
+                  <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.inventory.reorderLevel}</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.Shortage}</th>
                 </tr>
               </thead>
               <tbody>

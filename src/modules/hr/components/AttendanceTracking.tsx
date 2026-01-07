@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, Edit2 } from 'lucide-react';
-
+import {ar} from '../../../lib/ar';
 interface AttendanceRecord {
   id: string;
   employee_id: string;
@@ -74,18 +74,18 @@ export function AttendanceTracking() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (loading) return <div className="text-center py-8">تحميل ...</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Attendance Tracking</h3>
+        <h3 className="text-xl font-semibold text-gray-900"> تتبع الحضور</h3>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Record Attendance
+          سجل الحضور
         </button>
       </div>
 
@@ -97,7 +97,7 @@ export function AttendanceTracking() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Employee</option>
+            <option value="">اختيار موظف </option>
             {employees.map((emp) => (
               <option key={emp.id} value={emp.id}>
                 {emp.first_name} {emp.last_name}
@@ -112,14 +112,14 @@ export function AttendanceTracking() {
           />
           <input
             type="time"
-            placeholder="Check-in Time"
+            placeholder={ar.hr.checkIn}
             value={formData.check_in_time}
             onChange={(e) => setFormData({ ...formData, check_in_time: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            type="time"
-            placeholder="Check-out Time"
+            type="وقت الخروج"
+            placeholder={ar.hr.checkOut}
             value={formData.check_out_time}
             onChange={(e) => setFormData({ ...formData, check_out_time: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -129,21 +129,21 @@ export function AttendanceTracking() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Present</option>
-            <option>Absent</option>
-            <option>Late</option>
-            <option>Half Day</option>
+            <option>{ar.hr.present}</option>
+            <option>{ar.hr.absent}</option>
+            <option>{ar.hr.late}</option>
+            <option>{ar.hr.HalfDay}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Save Attendance
+              تسجيل الحضور
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              الغاء
             </button>
           </div>
         </form>
@@ -153,11 +153,11 @@ export function AttendanceTracking() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Employee</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Date</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Check-in</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Check-out</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">الموظف</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">التاريخ</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">الوصول</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">الخروج</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">الحالة</th>
             </tr>
           </thead>
           <tbody>

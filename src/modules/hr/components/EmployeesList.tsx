@@ -167,7 +167,7 @@ export function EmployeesList() {
         <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg mb-6 grid grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="First Name"
+            placeholder="الاسم الأول"
             value={formData.first_name}
             onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -175,7 +175,7 @@ export function EmployeesList() {
           />
           <input
             type="text"
-            placeholder="Last Name"
+            placeholder="الاسم الأخير"
             value={formData.last_name}
             onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -183,34 +183,34 @@ export function EmployeesList() {
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder={ar.email}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Position"
+            placeholder="المنصب"
             value={formData.position}
             onChange={(e) => setFormData({ ...formData, position: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Department"
+            placeholder="القسم"
             value={formData.department}
             onChange={(e) => setFormData({ ...formData, department: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
-            placeholder="Salary"
+            placeholder="الراتب"
             value={formData.salary}
             onChange={(e) => setFormData({ ...formData, salary: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            type="date"
+            type="الانضمام تاريخ"
             value={formData.joining_date}
             onChange={(e) => setFormData({ ...formData, joining_date: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -220,21 +220,21 @@ export function EmployeesList() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Active</option>
-            <option>Suspended</option>
-            <option>Resigned</option>
-            <option>Terminated</option>
+            <option>نشط</option>
+            <option>معلق</option>
+            <option>استقال</option>
+            <option>{ar.hr.Terminated}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              {editingId ? 'Update' : 'Add'} Employee
+              {editingId ? 'Update' : 'Add'} {ar.hr.employee}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              الغاء
             </button>
           </div>
         </form>
@@ -244,12 +244,12 @@ export function EmployeesList() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Name</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Email</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Position</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Department</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-700">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">الاسم</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.email}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">المنصب</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">القسم</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">الحالة</th>
+              <th className="px-4 py-3 text-center font-semibold text-gray-700">اجراءات</th>
             </tr>
           </thead>
           <tbody>

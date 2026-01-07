@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, ArrowUp, ArrowDown } from 'lucide-react';
-
+import {ar} from '../../../lib/ar';
 interface InventoryItem {
   id: string;
   warehouse_id: string;
@@ -124,18 +124,18 @@ export function InventoryItems() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Inventory Items</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.inventory.items}</h3>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Item
+          {ar.inventory.addItem }
         </button>
       </div>
 
@@ -147,14 +147,14 @@ export function InventoryItems() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Warehouse</option>
+            <option value="">{ar.inventory.selecteaWarehouse}</option>
             {warehouses.map((wh) => (
               <option key={wh.id} value={wh.id}>{wh.name}</option>
             ))}
           </select>
           <input
             type="text"
-            placeholder="Item Code"
+            placeholder={ar.inventory.itemCode}
             value={formData.item_code}
             onChange={(e) => setFormData({ ...formData, item_code: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -162,7 +162,7 @@ export function InventoryItems() {
           />
           <input
             type="text"
-            placeholder="Item Name"
+            placeholder={ar.inventory.itemName}
             value={formData.item_name}
             onChange={(e) => setFormData({ ...formData, item_name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -170,14 +170,14 @@ export function InventoryItems() {
           />
           <input
             type="text"
-            placeholder="Item Type"
+            placeholder={ar.inventory.itemtype}
             value={formData.item_type}
             onChange={(e) => setFormData({ ...formData, item_type: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
-            placeholder="Quantity"
+            placeholder={ar.inventory.quantity}
             value={formData.quantity}
             onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -185,7 +185,7 @@ export function InventoryItems() {
           />
           <input
             type="text"
-            placeholder="Unit (pcs, kg, liters, etc)"
+            placeholder={ar.inventory.unittype}
             value={formData.unit}
             onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -193,28 +193,28 @@ export function InventoryItems() {
           />
           <input
             type="number"
-            placeholder="Unit Cost"
+            placeholder={ar.inventory.unitCost}
             value={formData.unit_cost}
             onChange={(e) => setFormData({ ...formData, unit_cost: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
-            placeholder="Reorder Level"
+            placeholder={ar.inventory.reorderLevel}
             value={formData.reorder_level}
             onChange={(e) => setFormData({ ...formData, reorder_level: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Add Item
+              {ar.inventory.addItem }
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -224,12 +224,12 @@ export function InventoryItems() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Code</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Item Name</th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">Quantity</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Unit</th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">Reorder Level</th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-700">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.itemCode}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.itemName}</th>
+              <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.inventory.quantity}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.unit}</th>
+              <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.inventory.reorderLevel}</th>
+              <th className="px-4 py-3 text-center font-semibold text-gray-700">{ar.customers.actions}</th>
             </tr>
           </thead>
           <tbody>
@@ -249,7 +249,7 @@ export function InventoryItems() {
                     onClick={() => setShowMovement(showMovement === item.id ? null : item.id)}
                     className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
                   >
-                    Movement
+                    {ar.inventory.movements}
                   </button>
                 </td>
               </tr>
@@ -260,27 +260,27 @@ export function InventoryItems() {
 
       {showMovement && (
         <div className="mt-6 bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <h4 className="font-semibold text-gray-900 mb-4">Record Stock Movement</h4>
+          <h4 className="font-semibold text-gray-900 mb-4">{ar.inventory.RecordStockMovement}</h4>
           <div className="grid grid-cols-2 gap-4">
             <select
               value={movementData.movement_type}
               onChange={(e) => setMovementData({ ...movementData, movement_type: e.target.value })}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option>In</option>
-              <option>Out</option>
-              <option>Adjustment</option>
+              <option>{ar.inventory.in}</option>
+              <option>{ar.inventory.out}</option>
+              <option>{ar.inventory.Adjustment}</option>
             </select>
             <input
               type="number"
-              placeholder="Quantity"
+              placeholder={ar.inventory.movementQuantity}
               value={movementData.quantity}
               onChange={(e) => setMovementData({ ...movementData, quantity: e.target.value })}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <textarea
-              placeholder="Reason"
+              placeholder={ar.inventory.reason}
               value={movementData.reason}
               onChange={(e) => setMovementData({ ...movementData, reason: e.target.value })}
               className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 col-span-2"
@@ -292,13 +292,13 @@ export function InventoryItems() {
                 className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2"
               >
                 {movementData.movement_type === 'In' ? <ArrowUp className="w-4 h-4" /> : <ArrowDown className="w-4 h-4" />}
-                Record Movement
+                {ar.inventory.createMovement}
               </button>
               <button
                 onClick={() => setShowMovement(null)}
                 className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
               >
-                Cancel
+                {ar.Cancel}
               </button>
             </div>
           </div>

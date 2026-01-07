@@ -119,7 +119,7 @@ export const ar = {
   },
 
   // Customers
-  customers: {
+  
     title: 'العملاء',
     addCustomer: 'إضافة عميل',
     name: 'الاسم',
@@ -131,46 +131,95 @@ export const ar = {
     active: 'نشط',
     inactive: 'غير نشط',
     suspended: 'معلق',
-  },
+  
 
   // HR
   hr: {
     title: 'الموارد البشرية',
+    employee : 'الموظف',
+    Resigned : 'استقال',
+    Terminated : 'تم إنهاؤه',
+    Present : 'حاضر',
+    Absent : 'غائب',
+    Late : 'متأخر',
+    HalfDay : 'نصف يوم',
+    attendanceTracking: 'تتبع الحضور',
     employees: 'الموظفون',
     addEmployee: 'إضافة موظف',
-    attendance: 'الحضور',
-    recordAttendance: 'تسجيل الحضور',
-    payroll: 'الرواتب',
-    createPayroll: 'إنشاء رصيد راتب',
+    payrollManagement: 'إدارة الرواتب',
     reports: 'التقارير',
+    employeeID: 'معرف الموظف',
     firstName: 'الاسم الأول',
-    lastName: 'الاسم الأخير',
+    lastName: 'اسم العائلة',
     position: 'المنصب',
     department: 'القسم',
     salary: 'الراتب',
     joiningDate: 'تاريخ الانضمام',
+    attendance: 'الحضور',
+    recordAttendance: 'تسجيل الحضور',
+    payroll: 'الرواتب',
+    createPayroll: 'إنشاء رصيد راتب',
+   selectEmployee: 'اختر الموظف',
+    payPeriodStart: 'بداية فترة الدفع',
+    payPeriodEnd: 'نهاية فترة الدفع',
     attendanceDate: 'تاريخ الحضور',
     checkIn: 'الدخول',
     checkOut: 'الخروج',
     present: 'حاضر',
     absent: 'غائب',
     late: 'متأخر',
+    Period: 'الفترة',
+    Base: 'الأساسي',
+    Bonus: 'المكافأة',
+    Deductions: 'الخصومات',
     baseSalary: 'الراتب الأساسي',
     bonuses: 'المكافآت',
     deductions: 'الخصومات',
     netSalary: 'الراتب الصافي',
+    net: 'الصافي',
     status: 'الحالة',
+    totalEmployees: 'إجمالي الموظفين',
+    activeEmployees: 'الموظفون النشطون',
+    suspendedEmployees: 'الموظفون المعلقون',
+    resignedEmployees: 'الموظفون المستقيلون',
+    totalPayrollAmount: 'إجمالي مبلغ الرواتب',
+    employeeStatusSummary: 'ملخص حالة الموظف',
   },
-
+loading: 'جاري التحميل...',
+hrReportsAnalytics: 'تقارير وتحليلات الموارد البشرية',
   // Inventory
   inventory: {
     title: 'المخزون والمستودعات',
     warehouses: 'المستودعات',
     addWarehouse: 'إضافة مستودع',
+    contactperson: 'جهة الاتصال',
+    warehouseList: 'قائمة المستودعات',
+    actions: 'الإجراءات',
+    warehouse: 'المستودع',
+    editWarehouse: 'تعديل المستودع',
+    saveWarehouse: 'حفظ المستودع',
+    status: 'الحالة',
+    active: 'نشط',
+    inactive: 'غير نشط',
     items: 'العناصر',
     addItem: 'إضافة عنصر',
+    itemtype: 'نوع العنصر',
+    belowreorderlevel: 'عناصر تحت مستوى إعادة الترتيب  ',
+    CurrentStock: 'المخزون الحالي',
+    Shortage: 'النقص',
+    inventoryReports: 'تقارير المخزون',
+    totalItems: 'إجمالي العناصر',
+    lowStockItems: 'العناصر منخفضة المخزون',
+    totalQuantity: 'إجمالي الكمية',
+    totalValue: 'القيمة الإجمالية',
+    inventory: 'المخزون',
+    totalitems: 'إجمالي العناصر',
+    lowstockitems: 'العناصر منخفضة المخزون',
+    totalquantity: 'إجمالي الكمية',
+    totalvalue: 'القيمة الإجمالية',
     reports: 'التقارير',
     warehouseName: 'اسم المستودع',
+    selecteaWarehouse: 'اختر مستودع',
     location: 'الموقع',
     manager: 'المدير',
     capacity: 'السعة',
@@ -178,6 +227,17 @@ export const ar = {
     itemName: 'اسم العنصر',
     quantity: 'الكمية',
     unit: 'الوحدة',
+    movements: 'الحركات',
+    RecordStockMovement: 'تسجيل حركة المخزون',
+    movementType: 'نوع الحركة',
+    selectMovementType: 'اختر نوع الحركة',
+    in: 'وارد',
+    out: 'صادر',
+    Adjustment: 'تعديل',
+    movementQuantity: 'كمية الحركة',
+    movementDate: 'تاريخ الحركة',
+    createMovement: 'إنشاء حركة',
+    unittype: 'نوع الوحدة (قطع، كجم، لترات، إلخ)',
     reorderLevel: 'مستوى إعادة الترتيب',
     unitCost: 'تكلفة الوحدة',
     movement: 'الحركة',
@@ -191,6 +251,7 @@ export const ar = {
     title: 'الموردون والمقاولون',
     suppliers: 'الموردون',
     addSupplier: 'إضافة مورد',
+    Outstanding: 'المتبقي',
     contractors: 'المقاولون',
     addContractor: 'إضافة مقاول',
     invoices: 'الفواتير',
@@ -202,14 +263,18 @@ export const ar = {
     supplierName: 'اسم المورد',
     classification: 'التصنيف',
     materials: 'المواد',
+    dueDate: 'تاريخ الاستحقاق',
+    description: 'الوصف',
     services: 'الخدمات',
     contact: 'جهة الاتصال',
     invoiceNumber: 'رقم الفاتورة',
     invoiceDate: 'تاريخ الفاتورة',
     amount: 'المبلغ',
+    createinvoice: 'إنشاء فاتورة',
     paidAmount: 'المبلغ المدفوع',
     outstanding: 'المتبقي',
     progress: 'التقدم',
+    totalAmount: 'المبلغ الإجمالي',
   },
 
   // Projects
@@ -238,6 +303,18 @@ export const ar = {
     costCategory: 'فئة التكلفة',
     estimatedCost: 'التكلفة المقدرة',
     actualCost: 'التكلفة الفعلية',
+    totalEstimatedCost: 'إجمالي التكلفة المقدرة',
+    totalActualCost: 'إجمالي التكلفة الفعلية',
+    variance: 'التفاوت',
+    costStatus: 'حالة التكلفة',
+    costDescription: 'وصف التكلفة',
+    Estimated: 'مقدرة',
+    Incurred: 'متكبدة',
+    Paid: 'مدفوعة',
+    category: 'الفئة',
+    createProject: 'إنشاء مشروع',
+    createPhase: 'إنشاء مرحلة',
+    selectProject: 'اختر مشروع',
   },
 
   // Common Actions
@@ -268,4 +345,72 @@ export const ar = {
     noData: 'لا توجد بيانات',
     emptyFields: 'يرجى ملء جميع الحقول المطلوبة',
   },
+  customers: {
+    customer:'عميل',
+    customername:'اسم العميل',
+    totalcustomers:'إجمالي العملاء',
+    activecustomers:'العملاء النشطون',
+    inactivecustomers:'العملاء غير النشطين',
+    contactperson:'جهة الاتصال',
+    totalsales:'إجمالي المبيعات',
+    totalreceived:'إجمالي المستلم',
+    totaloutstanding:'إجمالي المستحق',
+    email:'البريد الإلكتروني',
+    phone:'الهاتف',
+    address:'العنوان',
+    status:'الحالة',
+    tax_id:'الرقم الضريبي',
+    contact:'جهة الاتصال',
+    actions:'الإجراءات',
+    active:'نشط',
+    inactive:'غير نشط',
+    suspended:'معلق',
+    title: 'العملاء',
+    addCustomer: 'إضافة عميل',
+    name: 'الاسم',
+    contactPerson: 'جهة الاتصال',
+   
+  },
+SalesInvoices:'فواتير المبيعات',
+NewInvoice:'فاتورة جديدة',
+SelectCustomer:'اختر العميل',
+Paid:'المدفوع',
+RecordPayment:'تسجيل الدفع',
+Progress:'التقدم',
+SalesReceivablesReports:'تقارير المبيعات والحسابات المستحقة',
+CollectionRate:'معدل التحصيل',
+CashFlowSummary:'ملخص التدفق النقدي',
+AmountReceived:'المبلغ المستلم',
+Outstanding:'المتبقي',
+CustomerDistribution:'توزيع العملاء',
+Cancel:'إلغاء',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };

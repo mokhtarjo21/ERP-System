@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
-
+import {ar} from '../../../lib/ar';
 interface Customer {
   id: string;
   name: string;
@@ -122,12 +122,12 @@ export function CustomersList() {
     setShowForm(true);
   };
 
-  if (loading) return <div className="text-center py-8">Loading customers...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Customers</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.customers.customer}</h3>
         <button
           onClick={() => {
             setShowForm(!showForm);
@@ -136,7 +136,7 @@ export function CustomersList() {
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Customer
+          {ar.customers.addCustomer}
         </button>
       </div>
 
@@ -144,7 +144,7 @@ export function CustomersList() {
         <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg mb-6 grid grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="Customer Name"
+            placeholder={ar.customers.customername}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -152,35 +152,35 @@ export function CustomersList() {
           />
           <input
             type="text"
-            placeholder="Contact Person"
+            placeholder={ar.customers.contactperson}
             value={formData.contact_person}
             onChange={(e) => setFormData({ ...formData, contact_person: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder={ar.customers.email}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="tel"
-            placeholder="Phone"
+            placeholder={ar.customers.phone}
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Address"
+            placeholder={ar.customers.address}
             value={formData.address}
             onChange={(e) => setFormData({ ...formData, address: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Tax ID"
+            placeholder={ar.customers.tax_id}
             value={formData.tax_id}
             onChange={(e) => setFormData({ ...formData, tax_id: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -190,13 +190,13 @@ export function CustomersList() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Active</option>
-            <option>Inactive</option>
-            <option>Suspended</option>
+            <option>{ar.customers.active}</option>
+            <option>{ar.customers.inactive}</option>
+            <option>{ar.customers.suspended}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              {editingId ? 'Update' : 'Add'} Customer
+              {editingId ? 'تعديل' : 'اضافة'} {ar.customers.customer}
             </button>
             <button
               type="button"
@@ -213,12 +213,12 @@ export function CustomersList() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Name</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Contact</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Email</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Phone</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-700">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.name}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.customers.contact}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.email}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.phone}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.status}</th>
+              <th className="px-4 py-3 text-center font-semibold text-gray-700">{ar.customers.actions}</th>
             </tr>
           </thead>
           <tbody>

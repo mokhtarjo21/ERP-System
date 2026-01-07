@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus } from 'lucide-react';
-
+import { ar } from '../../../lib/ar';
 interface ProjectCost {
   id: string;
   project_id: string;
@@ -77,7 +77,7 @@ export function ProjectCosts() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   const totalEstimated = costs.reduce((sum, c) => sum + (c.estimated_cost || 0), 0);
   const totalActual = costs.reduce((sum, c) => sum + (c.actual_cost || 0), 0);
@@ -86,27 +86,27 @@ export function ProjectCosts() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Project Costs</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.projects.costs}</h3>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Cost
+          {ar.projects.addCost}
         </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-          <p className="text-sm text-gray-600">Total Estimated</p>
+          <p className="text-sm text-gray-600">{ar.projects.totalEstimatedCost}</p>
           <p className="text-2xl font-bold text-blue-900">${totalEstimated.toFixed(2)}</p>
         </div>
         <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-          <p className="text-sm text-gray-600">Total Actual</p>
+          <p className="text-sm text-gray-600">{ar.projects.totalActualCost}</p>
           <p className="text-2xl font-bold text-green-900">${totalActual.toFixed(2)}</p>
         </div>
         <div className={`border p-4 rounded-lg ${variance > 0 ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200'}`}>
-          <p className="text-sm text-gray-600">Variance</p>
+          <p className="text-sm text-gray-600">{ar.projects.variance}</p>
           <p className={`text-2xl font-bold ${variance > 0 ? 'text-red-900' : 'text-green-900'}`}>
             ${variance.toFixed(2)}
           </p>
@@ -121,21 +121,21 @@ export function ProjectCosts() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Project</option>
+            <option value="">{ar.projects.selectProject}</option>
             {projects.map((proj) => (
               <option key={proj.id} value={proj.id}>{proj.project_name}</option>
             ))}
           </select>
           <input
             type="text"
-            placeholder="Cost Category"
+            placeholder={ar.projects.costCategory}
             value={formData.cost_category}
             onChange={(e) => setFormData({ ...formData, cost_category: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <textarea
-            placeholder="Description"
+            placeholder={ar.projects.costDescription}
             value={formData.cost_description}
             onChange={(e) => setFormData({ ...formData, cost_description: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 col-span-2"
@@ -143,7 +143,7 @@ export function ProjectCosts() {
           ></textarea>
           <input
             type="number"
-            placeholder="Estimated Cost"
+            placeholder={ar.projects.estimatedCost}
             value={formData.estimated_cost}
             onChange={(e) => setFormData({ ...formData, estimated_cost: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -151,7 +151,7 @@ export function ProjectCosts() {
           />
           <input
             type="number"
-            placeholder="Actual Cost"
+            placeholder={ar.projects.actualCost}
             value={formData.actual_cost}
             onChange={(e) => setFormData({ ...formData, actual_cost: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -161,20 +161,20 @@ export function ProjectCosts() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Estimated</option>
-            <option>Incurred</option>
-            <option>Paid</option>
+            <option>{ar.projects.Estimated}</option>
+            <option>{ar.projects.Incurred}</option>
+            <option>{ar.projects.Paid}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Add Cost
+              {ar.projects.addCost}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -184,12 +184,12 @@ export function ProjectCosts() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Project</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Category</th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">Estimated</th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">Actual</th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">Variance</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.projects}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.category}</th>
+              <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.projects.Estimated}</th>
+              <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.projects.actualCost}</th>
+              <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.projects.variance}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.status}</th>
             </tr>
           </thead>
           <tbody>

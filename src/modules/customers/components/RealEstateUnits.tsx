@@ -26,7 +26,7 @@ export function RealEstateUnits() {
   const [formData, setFormData] = useState({
     unit_code: '',
     unit_name: '',
-    unit_type: 'Apartment',
+    unit_type: ar.units.apartment,
     price: '',
     area_sqm: '',
     bedrooms: '',
@@ -104,7 +104,7 @@ export function RealEstateUnits() {
       setFormData({
         unit_code: '',
         unit_name: '',
-        unit_type: 'Apartment',
+        unit_type: 'شقة',
         price: '',
         area_sqm: '',
         bedrooms: '',

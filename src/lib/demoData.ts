@@ -67,8 +67,8 @@ export async function generateDemoData() {
     }
 
     const units = [
-      { code: 'APT-101', name: 'Luxury Apartment 101', type: 'Apartment', price: 500000, area: 1200, beds: 2, baths: 2, proj: 0 },
-      { code: 'APT-102', name: 'Luxury Apartment 102', type: 'Apartment', price: 520000, area: 1300, beds: 3, baths: 2, proj: 0 },
+      { code: 'APT-101', name: 'Luxury شقة 101', type: 'شقة', price: 500000, area: 1200, beds: 2, baths: 2, proj: 0 },
+      { code: 'APT-102', name: 'Luxury شقة 102', type: 'شقة', price: 520000, area: 1300, beds: 3, baths: 2, proj: 0 },
       { code: 'VILLA-01', name: 'Modern Villa 01', type: 'Villa', price: 1200000, area: 3000, beds: 4, baths: 3, proj: 1 },
       { code: 'VILLA-02', name: 'Modern Villa 02', type: 'Villa', price: 1350000, area: 3500, beds: 5, baths: 4, proj: 1 },
     ];

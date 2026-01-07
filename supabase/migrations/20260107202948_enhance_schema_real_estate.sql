@@ -2,7 +2,7 @@
   # Enhanced ERP Schema for Real Estate Investment Company
 
   1. New Enhancements:
-    - Real estate units (apartments, villas, land)
+    - Real estate units (شقةs, فيلاs, ارض)
     - Unit status tracking (Available, Reserved, Sold)
     - Sales contracts with financial terms
     - Installment plans
@@ -14,7 +14,7 @@
 
   2. New Tables:
     - user_roles: RBAC system
-    - real_estate_units: Apartments, villas, land properties
+    - real_estate_units: شقةs, فيلاs, ارض properties
     - unit_features: Specifications for units
     - sales_contracts: Contracts for unit sales
     - installment_plans: Payment schedules
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS real_estate_units (
   project_id uuid REFERENCES real_estate_projects(id),
   unit_code text NOT NULL,
   unit_name text NOT NULL,
-  unit_type text NOT NULL CHECK (unit_type IN ('Apartment', 'Villa', 'Land')),
+  unit_type text NOT NULL CHECK (unit_type IN ('شقة', 'فيلا', 'ارض')),
   location text,
   area_sqm decimal(10, 2),
   bedrooms integer,

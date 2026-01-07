@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
-
+import { ar } from '../../../lib/ar';
 interface Warehouse {
   id: string;
   name: string;
@@ -119,12 +119,12 @@ export function WarehousesList() {
     setShowForm(true);
   };
 
-  if (loading) return <div className="text-center py-8">Loading warehouses...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Warehouses</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.inventory.warehouses}</h3>
         <button
           onClick={() => {
             setShowForm(!showForm);
@@ -133,7 +133,7 @@ export function WarehousesList() {
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Warehouse
+          {ar.inventory.addWarehouse}
         </button>
       </div>
 
@@ -141,7 +141,7 @@ export function WarehousesList() {
         <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg mb-6 grid grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="Warehouse Name"
+            placeholder={ar.inventory.warehouseName}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -149,7 +149,7 @@ export function WarehousesList() {
           />
           <input
             type="text"
-            placeholder="Location"
+            placeholder={ar.inventory.location}
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -157,21 +157,21 @@ export function WarehousesList() {
           />
           <input
             type="text"
-            placeholder="Manager Name"
+            placeholder={ar.inventory.manager}
             value={formData.manager_name}
             onChange={(e) => setFormData({ ...formData, manager_name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="tel"
-            placeholder="Contact Phone"
+            placeholder={ar.inventory.contactperson}
             value={formData.contact_phone}
             onChange={(e) => setFormData({ ...formData, contact_phone: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
-            placeholder="Capacity (tons)"
+            placeholder={ar.inventory.capacity}
             value={formData.capacity_tons}
             onChange={(e) => setFormData({ ...formData, capacity_tons: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -181,19 +181,19 @@ export function WarehousesList() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Active</option>
-            <option>Inactive</option>
+            <option>{ar.inventory.active}</option>
+            <option>{ar.inventory.inactive}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              {editingId ? 'Update' : 'Add'} Warehouse
+              {editingId ? 'تعديل' : 'اضافة'} {ar.inventory.warehouse}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -203,12 +203,12 @@ export function WarehousesList() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Name</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Location</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Manager</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Phone</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-700">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.warehouseName}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.location}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.manager}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.contactperson}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.inventory.status}</th>
+              <th className="px-4 py-3 text-center font-semibold text-gray-700">{ar.inventory.actions}</th>
             </tr>
           </thead>
           <tbody>

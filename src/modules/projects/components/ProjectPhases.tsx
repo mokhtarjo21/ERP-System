@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus } from 'lucide-react';
-
+import { ar } from '../../../lib/ar';
 interface ProjectPhase {
   id: string;
   project_id: string;
@@ -80,7 +80,7 @@ export function ProjectPhases() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
