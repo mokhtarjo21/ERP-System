@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
-
+import { ar } from '../../../lib/ar';
 interface Project {
   id: string;
   project_code: string;
@@ -134,12 +134,12 @@ export function ProjectsList() {
     setShowForm(true);
   };
 
-  if (loading) return <div className="text-center py-8">Loading projects...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Real Estate Projects</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.projects.RealEstateProjects}</h3>
         <button
           onClick={() => {
             setShowForm(!showForm);
@@ -148,7 +148,7 @@ export function ProjectsList() {
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          New Project
+          {ar.projects.newProject}
         </button>
       </div>
 
@@ -156,7 +156,7 @@ export function ProjectsList() {
         <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg mb-6 grid grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="Project Code"
+            placeholder={ar.projects.projectCode}
             value={formData.project_code}
             onChange={(e) => setFormData({ ...formData, project_code: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -164,7 +164,7 @@ export function ProjectsList() {
           />
           <input
             type="text"
-            placeholder="Project Name"
+            placeholder={ar.projects.projectName}
             value={formData.project_name}
             onChange={(e) => setFormData({ ...formData, project_name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -172,14 +172,14 @@ export function ProjectsList() {
           />
           <input
             type="text"
-            placeholder="Location"
+            placeholder={ar.projects.location}
             value={formData.location}
             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Project Type"
+            placeholder={ar.projects.projectType}
             value={formData.project_type}
             onChange={(e) => setFormData({ ...formData, project_type: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -198,7 +198,7 @@ export function ProjectsList() {
           />
           <input
             type="number"
-            placeholder="Total Budget"
+            placeholder={ar.projects.totalBudget}
             value={formData.total_budget}
             onChange={(e) => setFormData({ ...formData, total_budget: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -208,22 +208,22 @@ export function ProjectsList() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Planning</option>
-            <option>Active</option>
-            <option>On Hold</option>
-            <option>Completed</option>
-            <option>Cancelled</option>
+            <option value='Planning'>{ar.projects.planning}</option>
+            <option value='Active'>{ar.projects.active}</option>
+            <option value='OnHold'>{ar.projects.onHold}</option>
+            <option value='Completed'>{ar.projects.completed}</option>
+            <option value='Cancelled'>{ar.projects.cancelled}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              {editingId ? 'Update' : 'Create'} Project
+              {editingId ? ar.projects.update : ar.projects.createProject}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -248,21 +248,21 @@ export function ProjectsList() {
             </div>
 
             <div className="space-y-2 mb-4">
-              <p className="text-sm text-gray-600"><span className="font-medium">Location:</span> {project.location}</p>
-              <p className="text-sm text-gray-600"><span className="font-medium">Budget:</span> ${project.total_budget?.toFixed(2)}</p>
+              <p className="text-sm text-gray-600"><span className="font-medium">{ar.projects.location}:</span> {project.location}</p>
+              <p className="text-sm text-gray-600"><span className="font-medium">{ar.projects.budget}:</span> ${project.total_budget?.toFixed(2)}</p>
               {project.start_date && (
-                <p className="text-sm text-gray-600"><span className="font-medium">Start:</span> {project.start_date}</p>
+                <p className="text-sm text-gray-600"><span className="font-medium">{ar.projects.startDate}:</span> {project.start_date}</p>
               )}
             </div>
 
             <div className="flex gap-2">
               <button onClick={() => handleEdit(project)} className="flex-1 px-3 py-2 text-sm bg-blue-100 text-blue-700 rounded hover:bg-blue-200 flex items-center justify-center gap-1">
                 <Edit2 className="w-4 h-4" />
-                Edit
+                {ar.edit}
               </button>
               <button onClick={() => handleDelete(project.id)} className="flex-1 px-3 py-2 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 flex items-center justify-center gap-1">
                 <Trash2 className="w-4 h-4" />
-                Delete
+                {ar.delete}
               </button>
             </div>
           </div>

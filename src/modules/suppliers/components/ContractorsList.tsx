@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, Edit2, Trash2 } from 'lucide-react';
-
+import {ar} from '../../../lib/ar';
 interface Contractor {
   id: string;
   name: string;
@@ -125,12 +125,12 @@ export function ContractorsList() {
     setShowForm(true);
   };
 
-  if (loading) return <div className="text-center py-8">Loading contractors...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Contractors</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.suppliers.contractors}</h3>
         <button
           onClick={() => {
             setShowForm(!showForm);
@@ -139,7 +139,7 @@ export function ContractorsList() {
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Contractor
+          {ar.suppliers.addContractor}
         </button>
       </div>
 
@@ -147,7 +147,7 @@ export function ContractorsList() {
         <form onSubmit={handleSubmit} className="bg-gray-50 p-6 rounded-lg mb-6 grid grid-cols-2 gap-4">
           <input
             type="text"
-            placeholder="Contractor Name"
+            placeholder={ar.suppliers.contractorName}
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -155,35 +155,35 @@ export function ContractorsList() {
           />
           <input
             type="text"
-            placeholder="License Number"
+            placeholder={ar.suppliers.licenseNumber}
             value={formData.license_number}
             onChange={(e) => setFormData({ ...formData, license_number: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Contact Person"
+            placeholder={ar.suppliers.contact}
             value={formData.contact_person}
             onChange={(e) => setFormData({ ...formData, contact_person: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder={ar.email}
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="tel"
-            placeholder="Phone"
+            placeholder={ar.phone}
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
-            placeholder="Insurance Info"
+            placeholder={ar.suppliers.insuranceInfo}
             value={formData.insurance_info}
             onChange={(e) => setFormData({ ...formData, insurance_info: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -193,20 +193,20 @@ export function ContractorsList() {
             onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option>Active</option>
-            <option>Inactive</option>
-            <option>Blacklisted</option>
+            <option>{ar.suppliers.active}</option>
+            <option>{ar.suppliers.inactive}</option>
+            <option>{ar.suppliers.blacklisted}</option>
           </select>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              {editingId ? 'Update' : 'Add'} Contractor
+              {editingId ? ar.suppliers.editcontractor : ar.suppliers.addContractor} 
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -216,13 +216,13 @@ export function ContractorsList() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Name</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">License</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Contact</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Email</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Phone</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
-              <th className="px-4 py-3 text-center font-semibold text-gray-700">Actions</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.suppliers.contractorName}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.suppliers.licenseNumber}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.suppliers.contact}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.email}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.phone}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.status}</th>
+              <th className="px-4 py-3 text-center font-semibold text-gray-700">{ar.customers.actions}</th>
             </tr>
           </thead>
           <tbody>

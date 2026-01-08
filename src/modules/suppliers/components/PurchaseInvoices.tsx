@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, DollarSign } from 'lucide-react';
-
+import { ar } from '../../../lib/ar';
 interface PurchaseInvoice {
   id: string;
   invoice_number: string;
@@ -106,7 +106,7 @@ export function PurchaseInvoices() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   const getPaidPercentage = (paid: number, total: number) => {
     return total > 0 ? Math.round((paid / total) * 100) : 0;
@@ -115,13 +115,13 @@ export function PurchaseInvoices() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Purchase Invoices</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.suppliers.purchase_invoices}</h3>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          New Invoice
+          {ar.suppliers.addinvoice}
         </button>
       </div>
 
@@ -133,14 +133,14 @@ export function PurchaseInvoices() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Supplier</option>
+            <option value="">{ar.suppliers.selectsupplier}</option>
             {suppliers.map((supp) => (
               <option key={supp.id} value={supp.id}>{supp.name}</option>
             ))}
           </select>
           <input
             type="text"
-            placeholder="Invoice Number"
+            placeholder={ar.suppliers.invoice_number}
             value={formData.invoice_number}
             onChange={(e) => setFormData({ ...formData, invoice_number: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -154,21 +154,21 @@ export function PurchaseInvoices() {
           />
           <input
             type="date"
-            placeholder="Due Date"
+            placeholder={ar.suppliers.due_date}
             value={formData.due_date}
             onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="number"
-            placeholder="Amount"
+            placeholder={ar.suppliers.amount}
             value={formData.amount}
             onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <textarea
-            placeholder="Description"
+            placeholder={ar.suppliers.description}
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 col-span-2"
@@ -176,14 +176,14 @@ export function PurchaseInvoices() {
           ></textarea>
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Create Invoice
+              {ar.suppliers.save_invoice}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -200,7 +200,7 @@ export function PurchaseInvoices() {
               <div className="flex justify-between items-start mb-3">
                 <div>
                   <h4 className="font-semibold text-gray-900">{supplier?.name}</h4>
-                  <p className="text-sm text-gray-600">Invoice: {invoice.invoice_number}</p>
+                  <p className="text-sm text-gray-600">{ar.suppliers.invoice}: {invoice.invoice_number}</p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                   invoice.status === 'Paid' ? 'bg-green-100 text-green-800' :
@@ -213,19 +213,21 @@ export function PurchaseInvoices() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div>
-                  <p className="text-xs text-gray-600">Total Amount</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.totalamount}</p>
                   <p className="text-lg font-semibold">${invoice.amount.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Paid</p>
+                  <p className="text-xs text-gray-600">
+                    {ar.suppliers.paidamount}
+                  </p>
                   <p className="text-lg font-semibold text-green-600">${invoice.paid_amount.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Outstanding</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.Outstanding}</p>
                   <p className="text-lg font-semibold text-red-600">${outstanding.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Progress</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.Progress}</p>
                   <p className="text-lg font-semibold">{paidPercent}%</p>
                 </div>
               </div>
@@ -245,7 +247,7 @@ export function PurchaseInvoices() {
                   className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   <DollarSign className="w-4 h-4" />
-                  Record Payment
+                  {ar.suppliers.RecordPayment}
                 </button>
               )}
             </div>

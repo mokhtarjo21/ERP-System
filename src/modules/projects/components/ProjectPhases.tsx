@@ -10,6 +10,8 @@ interface ProjectPhase {
   budget: number;
   status: string;
   start_date: string;
+  end_date: string;
+  
 }
 
 export function ProjectPhases() {
@@ -85,13 +87,13 @@ export function ProjectPhases() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Project Phases</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.projects.phases}</h3>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          Add Phase
+          {ar.projects.addPhase}
         </button>
       </div>
 
@@ -103,14 +105,14 @@ export function ProjectPhases() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Project</option>
+            <option value="">{ar.projects.selectProject}</option>
             {projects.map((proj) => (
               <option key={proj.id} value={proj.id}>{proj.project_name}</option>
             ))}
           </select>
           <input
             type="text"
-            placeholder="Phase Name"
+            placeholder={ar.projects.phaseName}
             value={formData.phase_name}
             onChange={(e) => setFormData({ ...formData, phase_name: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -118,7 +120,7 @@ export function ProjectPhases() {
           />
           <input
             type="number"
-            placeholder="Phase Number"
+            placeholder={ar.projects.phaseNumber}
             value={formData.phase_number}
             onChange={(e) => setFormData({ ...formData, phase_number: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -126,7 +128,7 @@ export function ProjectPhases() {
           />
           <input
             type="number"
-            placeholder="Budget"
+            placeholder={ar.projects.budget}
             value={formData.budget}
             onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -145,14 +147,14 @@ export function ProjectPhases() {
           />
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Add Phase
+              {ar.projects.addPhase}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -162,11 +164,11 @@ export function ProjectPhases() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="bg-gray-100 border-b-2 border-gray-300">
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Project</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Phase</th>
-              <th className="px-4 py-3 text-right font-semibold text-gray-700">Budget</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
-              <th className="px-4 py-3 text-left font-semibold text-gray-700">Timeline</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.projectName}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.phase}</th>
+              <th className="px-4 py-3 text-right font-semibold text-gray-700">{ar.projects.budget}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.status}</th>
+              <th className="px-4 py-3 text-left font-semibold text-gray-700">{ar.projects.timeline}</th>
             </tr>
           </thead>
           <tbody>
@@ -187,7 +189,7 @@ export function ProjectPhases() {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-sm text-gray-600">
-                    {phase.start_date ? `${phase.start_date} to ${phase.end_date || 'TBD'}` : 'Not scheduled'}
+                    {phase.start_date ? `${phase.start_date} to ${phase.end_date || 'TBD'}` : 'غير مجدول'}
                   </td>
                 </tr>
               );

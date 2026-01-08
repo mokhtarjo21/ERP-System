@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../../lib/supabase';
 import { Plus, DollarSign } from 'lucide-react';
-
+import {ar} from '../../../lib/ar';
 interface Statement {
   id: string;
   contractor_id: string;
@@ -86,7 +86,7 @@ export function ContractorStatements() {
 
   const handlePayment = async (statementId: string, claimedAmount: number, paidAmount: number) => {
     const outstanding = claimedAmount - paidAmount;
-    const paymentAmount = prompt(`Outstanding: $${outstanding.toFixed(2)}\nEnter payment amount:`, outstanding.toString());
+    const paymentAmount = prompt(`${ar.suppliers.Outstanding}: $${outstanding.toFixed(2)}\nEnter payment amount:`, outstanding.toString());
     if (!paymentAmount) return;
 
     try {
@@ -114,7 +114,7 @@ export function ContractorStatements() {
     }
   };
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
+  if (loading) return <div className="text-center py-8">{ar.loading}</div>;
 
   const filteredContracts = formData.contractor_id
     ? contracts.filter(c => c.contractor_id === formData.contractor_id)
@@ -123,13 +123,13 @@ export function ContractorStatements() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">Contractor Statements</h3>
+        <h3 className="text-xl font-semibold text-gray-900">{ar.suppliers.ContractorStatements}</h3>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
         >
           <Plus className="w-5 h-5" />
-          New Statement
+          {ar.suppliers.NewStatement}
         </button>
       </div>
 
@@ -141,7 +141,7 @@ export function ContractorStatements() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Contractor</option>
+            <option value="">{ar.suppliers.selectContractor}</option>
             {contractors.map((cont) => (
               <option key={cont.id} value={cont.id}>{cont.name}</option>
             ))}
@@ -152,7 +152,7 @@ export function ContractorStatements() {
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           >
-            <option value="">Select Contract</option>
+            <option value="">{ar.suppliers.SelectContract}</option>
             {filteredContracts.map((con) => (
               <option key={con.id} value={con.id}>{con.contract_number}</option>
             ))}
@@ -165,7 +165,7 @@ export function ContractorStatements() {
           />
           <input
             type="number"
-            placeholder="Progress %"
+            placeholder={ar.suppliers.ProgressPercentage}
             value={formData.progress_percentage}
             onChange={(e) => setFormData({ ...formData, progress_percentage: e.target.value })}
             min="0"
@@ -174,7 +174,7 @@ export function ContractorStatements() {
           />
           <input
             type="number"
-            placeholder="Amount Claimed"
+            placeholder={ar.suppliers.AmountClaimed}
             value={formData.amount_claimed}
             onChange={(e) => setFormData({ ...formData, amount_claimed: e.target.value })}
             className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 col-span-2"
@@ -182,14 +182,14 @@ export function ContractorStatements() {
           />
           <div className="col-span-2 flex gap-2">
             <button type="submit" className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-              Create Statement
+              {ar.suppliers.createStatement}
             </button>
             <button
               type="button"
               onClick={() => setShowForm(false)}
               className="flex-1 px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400"
             >
-              Cancel
+              {ar.Cancel}
             </button>
           </div>
         </form>
@@ -209,7 +209,7 @@ export function ContractorStatements() {
               <div className="flex justify-between items-start mb-3">
                 <div>
                   <h4 className="font-semibold text-gray-900">{contractor?.name}</h4>
-                  <p className="text-sm text-gray-600">Contract: {contract?.contract_number}</p>
+                  <p className="text-sm text-gray-600">{ar.suppliers.contractnumber}: {contract?.contract_number}</p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                   statement.status === 'Paid' ? 'bg-green-100 text-green-800' :
@@ -222,23 +222,23 @@ export function ContractorStatements() {
 
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
                 <div>
-                  <p className="text-xs text-gray-600">Progress</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.progress}</p>
                   <p className="text-lg font-semibold">{statement.progress_percentage}%</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Amount Claimed</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.AmountClaimed}</p>
                   <p className="text-lg font-semibold">${statement.amount_claimed.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Amount Paid</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.AmountPaid}</p>
                   <p className="text-lg font-semibold text-green-600">${statement.amount_paid.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Outstanding</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.Outstanding}</p>
                   <p className="text-lg font-semibold text-red-600">${outstanding.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Date</p>
+                  <p className="text-xs text-gray-600">{ar.suppliers.invoiceDate}</p>
                   <p className="text-sm font-semibold">{statement.statement_date}</p>
                 </div>
               </div>
@@ -258,7 +258,7 @@ export function ContractorStatements() {
                   className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
                   <DollarSign className="w-4 h-4" />
-                  Record Payment
+                  {ar.suppliers.RecordPayment}
                 </button>
               )}
             </div>
